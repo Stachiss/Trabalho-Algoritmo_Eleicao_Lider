@@ -36,7 +36,7 @@ class Node:
         if chosen_node.thread.is_alive():
             # Se a thread do nó escolhido ainda estiver executando, é porque ele não respondeu à eleição.
             # Nesse caso, o nó atual assume que o nó escolhido falhou e se torna o novo coordenador.
-            print(f"Node {chosen_node.id} nao respondeu. No {self.id} eh o novo coordenador.")
+            print(f"Node {chosen_node.id} nao respondeu. Node {self.id} eh o novo coordenador.")
             self.coordinator = self
         else:
             # Se a thread do nó escolhido já terminou, é porque ele venceu a eleição.
