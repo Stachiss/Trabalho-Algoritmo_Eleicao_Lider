@@ -1,3 +1,4 @@
+# coding=UTF-8
 import time
 import random
 import threading
@@ -20,27 +21,27 @@ class Node:
     # Inicia uma eleição neste nó.
     def start_election(self):
         # Imprime uma mensagem informando que o nó iniciou a eleição.
-        print(f"Nó {self.id} iniciou a eleição.")
+        print(f"Node {self.id} iniciou a eleicao.")
         # Cria uma lista de nós com IDs maiores que o ID do nó atual.
         higher_nodes = [node for node in self.nodes if node.id > self.id]
         # Se não houver nós com IDs maiores, o nó atual é o novo coordenador.
         if not higher_nodes:
-            print(f"Nó {self.id} é o novo coordenador.")
+            print(f"Node {self.id} eh o novo coordenador.")
             self.coordinator = self
             return
 
         # Escolhe um nó aleatório da lista de nós com IDs maiores e inicia uma eleição nele.
         chosen_node = random.choice(higher_nodes)
-        print(f"Nó {self.id} escolheu o nó {chosen_node.id}.")
+        print(f"Node {self.id} escolheu o node {chosen_node.id}.")
         if chosen_node.thread.is_alive():
             # Se a thread do nó escolhido ainda estiver executando, é porque ele não respondeu à eleição.
             # Nesse caso, o nó atual assume que o nó escolhido falhou e se torna o novo coordenador.
-            print(f"Nó {chosen_node.id} não respondeu. Nó {self.id} é o novo coordenador.")
+            print(f"Node {chosen_node.id} nao respondeu. No {self.id} eh o novo coordenador.")
             self.coordinator = self
         else:
             # Se a thread do nó escolhido já terminou, é porque ele venceu a eleição.
             # Nesse caso, ele se torna o novo coordenador.
-            print(f"Nó {chosen_node.id} venceu a eleição.")
+            print(f"Node {chosen_node.id} venceu a eleicao.")
             self.coordinator = chosen_node
 
     # Inicia a thread do nó.
@@ -65,4 +66,4 @@ if __name__ == "__main__":
         node.thread.join()
 
     # Imprime o coordenador final.
-    print(f"O coordenador final é o nó {nodes[0].coordinator.id}.")
+    print(f"O coordenador final eh o node {nodes[0].coordinator.id}.")
