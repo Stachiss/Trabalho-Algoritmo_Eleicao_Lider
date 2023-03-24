@@ -64,6 +64,3 @@ if __name__ == "__main__":
     # Aguarda todas as threads terminarem antes de continuar a execução.
     for node in nodes:
         node.thread.join()
-
-    # Imprime o coordenador final.
-    print(f"O coordenador final eh o node {nodes[0].coordinator.id}.")
